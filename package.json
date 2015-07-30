@@ -1,0 +1,31 @@
+{
+  "name": "formell.js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babelify": "^6.1.3",
+    "chai": "^3.2.0",
+    "grunt": "^0.4.5",
+    "grunt-browserify": "^3.8.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-karma": "*",
+    "karma-browserify": "*",
+    "karma-chai": "^0.1.0",
+    "karma-mocha": "*",
+    "karma-mocha-reporter": "^1.0.3",
+    "karma-phantomjs-launcher": "*",
+    "karma-sinon": "^1.0.4",
+    "sinon": "^1.15.4"
+  },
+  "dependencies": {
+    "babel-core": "^5.8.9",
+    "babel-runtime": "^5.8.9",
+    "virtual-dom": "^2.1.0"
+  }
+}
