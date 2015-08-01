@@ -1,4 +1,4 @@
-import Formell from '../../src/formell.js';
+import Formell from '../../../src/formell.js';
 import chai from 'chai';
 
 var expect = chai.expect;

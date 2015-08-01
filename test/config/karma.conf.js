@@ -8,7 +8,7 @@ module.exports = function(config) {
 
   config.set({
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
+    autoWatch: false,
 
     // base path, that will be used to resolve files and exclude
     basePath: '',
@@ -24,8 +24,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        '../src/**/*.js',
-        'spec/**/*.js'
+        '../../src/**/*.js',
+        '../spec/unit/*.js'
     ],
 
     // list of files / patterns to exclude
@@ -33,7 +33,11 @@ module.exports = function(config) {
     ],
 
     // web server port
-    port: 8080,
+    port: 9876,
+
+
+    // cli runner port
+    runnerPort: 9100,
 
     browserify: {
       debug: true,
@@ -43,8 +47,8 @@ module.exports = function(config) {
     },
 
     preprocessors: {
-      '../src/**/*.js': 'browserify',
-      'spec/**/*.js': 'browserify'
+      '../../src/**/*.js': 'browserify',
+      '../spec/unit/*.js': 'browserify'
     },
 
     reporters: ['mocha'],
@@ -63,11 +67,14 @@ module.exports = function(config) {
 
     // Which plugins to enable
     plugins: [
-        "karma-phantomjs-launcher",
         "karma-mocha",
         "karma-chai",
         "karma-sinon",
         "karma-browserify",
+        "karma-phantomjs-launcher",
+        "karma-chrome-launcher",
+        "karma-firefox-launcher",
+        "karma-ie-launcher",
         "karma-mocha-reporter"
     ],
 
