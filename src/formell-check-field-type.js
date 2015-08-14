@@ -20,14 +20,14 @@ class FormellCheckFieldType {
 
 	of(key, value, options={}) {
 
-		var type = null;
-		var isCheckMixins;
-		var methodName;
+		let type = null;
+		let isCheckMixins;
+		let methodName;
 
 		if(!this.mixins || options.mixins) {
 			this.addMixins(options.mixins);
 		}
-		
+
 		isCheckMixins = this.mixins;
 
 		for(methodName in isCheckMixins) {
