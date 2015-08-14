@@ -15,7 +15,7 @@ class Formell {
 	}
 
 	get options() {
-		return this._options;
+		return this._options || {};
 	}
 
 	set options(options) {
@@ -25,15 +25,42 @@ class Formell {
 	get defaults() {
 		return {
 			biDirectionalDataBind: true,
-			formH: h('form', {})
+			formH: h('form', {id: this.uid}, [])
 		};
 	}
 
-	constructor(options={}) {
-		this._form = null;
-		this._options = options || {};
+	_createUUID() {
+		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+			var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+			return v.toString(16);
+		});
+	}
 
-		this.options = Object.assign(this.options, options, this.defaults);
+	constructor(options={}) {
+
+		this._form = null;
+		this.formElement = null;
+		this._initOptions(options);
+
+		this.addAllDataFields(this.options.data);
+
+		this.form = this.formElement = createElement(this.options.formH);
+
+		if (options.parent) {
+
+			this.formElement = this._includeForm(options.parent);
+		}
+
+		return this;
+	}
+
+	_initOptions(options) {
+
+		options.formAttributes = options.formAttributes || {};
+		// id set via options -> no! -> use uid if exists -> no! -> create uid
+		this.uid = options.formAttributes.id || this.uid || this._createUUID();
+
+		this.options = Object.assign(this.options, this.defaults, options);
 	}
 
 	_convertToDOMNode(normalizeVal) {
@@ -52,56 +79,29 @@ class Formell {
 		formParent = this._convertToDOMNode(formParent);
 
 		if (formParent) {
+
 			formParent.appendChild(this.form);
 		}
 
 		return formParent;
 	}
 
-	_useExistingForm(form) {
+	addAllDataFields(data) {
 
-		let formWrapper;
+		var key;
 
-		form = this._convertToDOMNode(form);
+		for (key in data) {
 
-		if (form) {
-			this.options.formH = hParser(form.outerHTML);
-			formWrapper = form.parentNode;
-		}
+			if (data.hasOwnProperty(key)) {
 
-		if (formWrapper) {
-
-			this.form = createElement(this.options.formH);
-			formWrapper.replaceChild(this.form, form);
+				this.addOneDataField(key, data[key]);
+			}
 		}
 	}
 
-	create(options={}) {
+	addOneDataField(key, value) {
 
-		let formWithWrapper;
-
-		this.options = Object.assign(this.options, options);
-
-		this.form = createElement(this.options.formH);
-
-		if (options.parent) {
-			formWithWrapper = this._includeForm(options.parent);
-		}
-
-		return formWithWrapper || this.form;
-	}
-
-	use(options={}) {
-
-		this.options = Object.assign(this.options, options);
-
-		if (options.form) {
-			this._useExistingForm(options.form);
-		} else {
-			throw new Error('Form node or valid form selector via options.form expected.');
-		}
-
-		return this.form;
+		//console.log(key, value);
 	}
 };
 
