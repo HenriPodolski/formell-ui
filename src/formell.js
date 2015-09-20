@@ -1,4 +1,5 @@
 import FormView from './views/form-view';
+import * as sdsdsd from './factories/form-field-factory';
 import {createUID, getGlobalObject} from './libs/helpers';
 
 class Formell {
@@ -21,8 +22,6 @@ class Formell {
 		let formView = new FormView(options.form);
 
 		this.form = formView.el;
-
-		return this;
 	}
 };
 

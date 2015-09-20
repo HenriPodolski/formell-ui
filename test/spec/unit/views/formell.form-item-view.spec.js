@@ -1,4 +1,4 @@
-import FormItemView from '../../../src/views/form-item-view.js';
+import FormItemView from '../../../../src/views/form-item-view.js';
 import chai from 'chai';
 
 var expect = chai.expect;
@@ -23,5 +23,15 @@ describe('Formell FormItemView', function () {
 		});
 
 		expect(formItemView.el).to.equal(fieldGroup);
+	});
+
+	it('should apply CSS classes when passed', ()=>{
+
+		let classNames = 'some-class';
+		let formItemView = new FormItemView({
+			className: classNames
+		});
+
+		expect(formItemView.el.getAttribute('class')).to.equal('frmll-item ' + classNames);
 	});
 });

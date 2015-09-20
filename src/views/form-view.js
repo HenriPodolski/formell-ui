@@ -1,26 +1,20 @@
-import BaseView from '../libs/base-view';
+import FormellBaseView from './formell-base-view';
 
 /**
  * creates form
  */
 
-class FormView extends BaseView {
+class FormView extends FormellBaseView {
 
 	constructor(options={}) {
 
 		options.tagName = options.tagName || 'form';
-		options.className = options.className || 'frmll-form';
-
-		if (options.className.indexOf('frmll-form') < 0) {
-			options.className = 'frmll-form ' + options.className;
-		}
+		options.baseClassName = 'frmll-form';
 
 		super(options);
 
 		this.setAttributes();
 		this.addClasses(this.options.className);
-
-		return this;
 	}
 
 	ensureElement() {

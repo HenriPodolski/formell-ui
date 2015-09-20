@@ -21,10 +21,10 @@ module.exports = function(config) {
     ],
 
     // list of files / patterns to load in the browser
-    files: [
-        '../src/**/*.js',
-        'spec/unit/**/*.js'
-    ],
+      files: [
+          '../../src/**/*.js',
+          '../spec/unit/**/*.js'
+      ],
 
     // list of files / patterns to exclude
     exclude: [
@@ -41,8 +41,8 @@ module.exports = function(config) {
     },
 
     preprocessors: {
-      '../src/**/*.js': 'browserify',
-      'spec/unit/**/*.js': 'browserify'
+      '../../src/**/*.js': 'browserify',
+      '../spec/unit/**/*.js': 'browserify'
     },
 
     reporters: ['mocha'],

@@ -1,10 +1,14 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/create"), __esModule: true };
-},{"core-js/library/fn/object/create":8}],2:[function(require,module,exports){
+},{"core-js/library/fn/object/create":12}],2:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/define-property"), __esModule: true };
-},{"core-js/library/fn/object/define-property":9}],3:[function(require,module,exports){
+},{"core-js/library/fn/object/define-property":13}],3:[function(require,module,exports){
+module.exports = { "default": require("core-js/library/fn/object/get-own-property-descriptor"), __esModule: true };
+},{"core-js/library/fn/object/get-own-property-descriptor":14}],4:[function(require,module,exports){
+module.exports = { "default": require("core-js/library/fn/object/get-own-property-names"), __esModule: true };
+},{"core-js/library/fn/object/get-own-property-names":15}],5:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/set-prototype-of"), __esModule: true };
-},{"core-js/library/fn/object/set-prototype-of":10}],4:[function(require,module,exports){
+},{"core-js/library/fn/object/set-prototype-of":16}],6:[function(require,module,exports){
 "use strict";
 
 exports["default"] = function (instance, Constructor) {
@@ -14,7 +18,7 @@ exports["default"] = function (instance, Constructor) {
 };
 
 exports.__esModule = true;
-},{}],5:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 "use strict";
 
 var _Object$defineProperty = require("babel-runtime/core-js/object/define-property")["default"];
@@ -39,7 +43,33 @@ exports["default"] = (function () {
 })();
 
 exports.__esModule = true;
-},{"babel-runtime/core-js/object/define-property":2}],6:[function(require,module,exports){
+},{"babel-runtime/core-js/object/define-property":2}],8:[function(require,module,exports){
+"use strict";
+
+var _Object$getOwnPropertyNames = require("babel-runtime/core-js/object/get-own-property-names")["default"];
+
+var _Object$getOwnPropertyDescriptor = require("babel-runtime/core-js/object/get-own-property-descriptor")["default"];
+
+var _Object$defineProperty = require("babel-runtime/core-js/object/define-property")["default"];
+
+exports["default"] = function (obj, defaults) {
+  var keys = _Object$getOwnPropertyNames(defaults);
+
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+
+    var value = _Object$getOwnPropertyDescriptor(defaults, key);
+
+    if (value && value.configurable && obj[key] === undefined) {
+      _Object$defineProperty(obj, key, value);
+    }
+  }
+
+  return obj;
+};
+
+exports.__esModule = true;
+},{"babel-runtime/core-js/object/define-property":2,"babel-runtime/core-js/object/get-own-property-descriptor":3,"babel-runtime/core-js/object/get-own-property-names":4}],9:[function(require,module,exports){
 "use strict";
 
 var _Object$create = require("babel-runtime/core-js/object/create")["default"];
@@ -63,7 +93,7 @@ exports["default"] = function (subClass, superClass) {
 };
 
 exports.__esModule = true;
-},{"babel-runtime/core-js/object/create":1,"babel-runtime/core-js/object/set-prototype-of":3}],7:[function(require,module,exports){
+},{"babel-runtime/core-js/object/create":1,"babel-runtime/core-js/object/set-prototype-of":5}],10:[function(require,module,exports){
 "use strict";
 
 exports["default"] = function (obj) {
@@ -73,20 +103,53 @@ exports["default"] = function (obj) {
 };
 
 exports.__esModule = true;
-},{}],8:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
+"use strict";
+
+exports["default"] = function (obj) {
+  if (obj && obj.__esModule) {
+    return obj;
+  } else {
+    var newObj = {};
+
+    if (obj != null) {
+      for (var key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];
+      }
+    }
+
+    newObj["default"] = obj;
+    return newObj;
+  }
+};
+
+exports.__esModule = true;
+},{}],12:[function(require,module,exports){
 var $ = require('../../modules/$');
 module.exports = function create(P, D){
   return $.create(P, D);
 };
-},{"../../modules/$":15}],9:[function(require,module,exports){
+},{"../../modules/$":22}],13:[function(require,module,exports){
 var $ = require('../../modules/$');
 module.exports = function defineProperty(it, key, desc){
   return $.setDesc(it, key, desc);
 };
-},{"../../modules/$":15}],10:[function(require,module,exports){
+},{"../../modules/$":22}],14:[function(require,module,exports){
+var $ = require('../../modules/$');
+require('../../modules/es6.object.statics-accept-primitives');
+module.exports = function getOwnPropertyDescriptor(it, key){
+  return $.getDesc(it, key);
+};
+},{"../../modules/$":22,"../../modules/es6.object.statics-accept-primitives":25}],15:[function(require,module,exports){
+var $ = require('../../modules/$');
+require('../../modules/es6.object.statics-accept-primitives');
+module.exports = function getOwnPropertyNames(it){
+  return $.getNames(it);
+};
+},{"../../modules/$":22,"../../modules/es6.object.statics-accept-primitives":25}],16:[function(require,module,exports){
 require('../../modules/es6.object.set-prototype-of');
 module.exports = require('../../modules/$').core.Object.setPrototypeOf;
-},{"../../modules/$":15,"../../modules/es6.object.set-prototype-of":17}],11:[function(require,module,exports){
+},{"../../modules/$":22,"../../modules/es6.object.set-prototype-of":24}],17:[function(require,module,exports){
 var $ = require('./$');
 function assert(condition, msg1, msg2){
   if(!condition)throw TypeError(msg2 ? msg1 + msg2 : msg1);
@@ -105,7 +168,7 @@ assert.inst = function(it, Constructor, name){
   return it;
 };
 module.exports = assert;
-},{"./$":15}],12:[function(require,module,exports){
+},{"./$":22}],18:[function(require,module,exports){
 // Optional / simple context binding
 var assertFunction = require('./$.assert').fn;
 module.exports = function(fn, that, length){
@@ -125,7 +188,7 @@ module.exports = function(fn, that, length){
       return fn.apply(that, arguments);
     };
 };
-},{"./$.assert":11}],13:[function(require,module,exports){
+},{"./$.assert":17}],19:[function(require,module,exports){
 var $          = require('./$')
   , global     = $.g
   , core       = $.core
@@ -174,13 +237,34 @@ function $def(type, name, source){
   }
 }
 module.exports = $def;
-},{"./$":15}],14:[function(require,module,exports){
+},{"./$":22}],20:[function(require,module,exports){
 module.exports = function($){
   $.FW   = false;
   $.path = $.core;
   return $;
 };
-},{}],15:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
+// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
+var $ = require('./$')
+  , toString = {}.toString
+  , getNames = $.getNames;
+
+var windowNames = typeof window == 'object' && Object.getOwnPropertyNames
+  ? Object.getOwnPropertyNames(window) : [];
+
+function getWindowNames(it){
+  try {
+    return getNames(it);
+  } catch(e){
+    return windowNames.slice();
+  }
+}
+
+module.exports.get = function getOwnPropertyNames(it){
+  if(windowNames && toString.call(it) == '[object Window]')return getWindowNames(it);
+  return getNames($.toObject(it));
+};
+},{"./$":22}],22:[function(require,module,exports){
 'use strict';
 var global = typeof self != 'undefined' ? self : Function('return this')()
   , core   = {}
@@ -277,7 +361,7 @@ var $ = module.exports = require('./$.fw')({
 /* eslint-disable no-undef */
 if(typeof __e != 'undefined')__e = core;
 if(typeof __g != 'undefined')__g = global;
-},{"./$.fw":14}],16:[function(require,module,exports){
+},{"./$.fw":20}],23:[function(require,module,exports){
 // Works with __proto__ only. Old v8 can't work with null proto objects.
 /* eslint-disable no-proto */
 var $      = require('./$')
@@ -303,11 +387,207 @@ module.exports = {
     : undefined),
   check: check
 };
-},{"./$":15,"./$.assert":11,"./$.ctx":12}],17:[function(require,module,exports){
+},{"./$":22,"./$.assert":17,"./$.ctx":18}],24:[function(require,module,exports){
 // 19.1.3.19 Object.setPrototypeOf(O, proto)
 var $def = require('./$.def');
 $def($def.S, 'Object', {setPrototypeOf: require('./$.set-proto').set});
-},{"./$.def":13,"./$.set-proto":16}],18:[function(require,module,exports){
+},{"./$.def":19,"./$.set-proto":23}],25:[function(require,module,exports){
+var $        = require('./$')
+  , $def     = require('./$.def')
+  , isObject = $.isObject
+  , toObject = $.toObject;
+$.each.call(('freeze,seal,preventExtensions,isFrozen,isSealed,isExtensible,' +
+  'getOwnPropertyDescriptor,getPrototypeOf,keys,getOwnPropertyNames').split(',')
+, function(KEY, ID){
+  var fn     = ($.core.Object || {})[KEY] || Object[KEY]
+    , forced = 0
+    , method = {};
+  method[KEY] = ID == 0 ? function freeze(it){
+    return isObject(it) ? fn(it) : it;
+  } : ID == 1 ? function seal(it){
+    return isObject(it) ? fn(it) : it;
+  } : ID == 2 ? function preventExtensions(it){
+    return isObject(it) ? fn(it) : it;
+  } : ID == 3 ? function isFrozen(it){
+    return isObject(it) ? fn(it) : true;
+  } : ID == 4 ? function isSealed(it){
+    return isObject(it) ? fn(it) : true;
+  } : ID == 5 ? function isExtensible(it){
+    return isObject(it) ? fn(it) : false;
+  } : ID == 6 ? function getOwnPropertyDescriptor(it, key){
+    return fn(toObject(it), key);
+  } : ID == 7 ? function getPrototypeOf(it){
+    return fn(Object($.assertDefined(it)));
+  } : ID == 8 ? function keys(it){
+    return fn(toObject(it));
+  } : require('./$.get-names').get;
+  try {
+    fn('z');
+  } catch(e){
+    forced = 1;
+  }
+  $def($def.S + $def.F * forced, 'Object', method);
+});
+},{"./$":22,"./$.def":19,"./$.get-names":21}],26:[function(require,module,exports){
+'use strict';
+
+var _inherits = require('babel-runtime/helpers/inherits')['default'];
+
+var _createClass = require('babel-runtime/helpers/create-class')['default'];
+
+var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
+
+var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
+
+var _interopRequireWildcard = require('babel-runtime/helpers/interop-require-wildcard')['default'];
+
+exports.__esModule = true;
+
+var _libsBase = require('../libs/base');
+
+var _libsBase2 = _interopRequireDefault(_libsBase);
+
+var _fieldTypesIndex = require('../field-types/index');
+
+var fieldTypes = _interopRequireWildcard(_fieldTypesIndex);
+
+var _libsHelpers = require('../libs/helpers');
+
+var FormFieldFactory = (function (_Base) {
+	_inherits(FormFieldFactory, _Base);
+
+	_createClass(FormFieldFactory, [{
+		key: 'types',
+		get: function get() {
+			return this._types;
+		},
+		set: function set(type) {
+
+			if (!this._types) {
+				this._types = [];
+			}
+
+			this._types.push(type);
+		}
+	}, {
+		key: 'field',
+		get: function get() {
+			return this.switchFieldTypes();
+		}
+	}]);
+
+	function FormFieldFactory() {
+		var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+		_classCallCheck(this, FormFieldFactory);
+
+		_Base.call(this, options);
+
+		console.log(fieldTypes);
+
+		for (var type in fieldTypes) {
+
+			if (fieldTypes.hasOwnProperty(type) && type.indexOf('__es') !== 0) {
+				this.types = fieldTypes[type];
+			}
+		}
+	}
+
+	FormFieldFactory.prototype.switchFieldTypes = function switchFieldTypes() {
+
+		console.log(this.types);
+
+		return null;
+	};
+
+	return FormFieldFactory;
+})(_libsBase2['default']);
+
+_libsHelpers.getGlobalObject().FormFieldFactory = FormFieldFactory;
+
+exports['default'] = FormFieldFactory;
+module.exports = exports['default'];
+},{"../field-types/index":27,"../libs/base":32,"../libs/helpers":33,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/create-class":7,"babel-runtime/helpers/inherits":9,"babel-runtime/helpers/interop-require-default":10,"babel-runtime/helpers/interop-require-wildcard":11}],27:[function(require,module,exports){
+'use strict';
+
+var _defaults = require('babel-runtime/helpers/defaults')['default'];
+
+var _interopRequireWildcard = require('babel-runtime/helpers/interop-require-wildcard')['default'];
+
+exports.__esModule = true;
+
+var _inputEmail = require('./input/email');
+
+_defaults(exports, _interopRequireWildcard(_inputEmail));
+
+var _inputText = require('./input/text');
+
+_defaults(exports, _interopRequireWildcard(_inputText));
+},{"./input/email":28,"./input/text":29,"babel-runtime/helpers/defaults":8,"babel-runtime/helpers/interop-require-wildcard":11}],28:[function(require,module,exports){
+'use strict';
+
+var _createClass = require('babel-runtime/helpers/create-class')['default'];
+
+var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
+
+exports.__esModule = true;
+
+var EmailFieldType = (function () {
+	function EmailFieldType() {
+		_classCallCheck(this, EmailFieldType);
+	}
+
+	_createClass(EmailFieldType, [{
+		key: 'uiType',
+		get: function get() {
+
+			return 'input';
+		}
+	}, {
+		key: 'type',
+		get: function get() {
+
+			return 'email';
+		}
+	}]);
+
+	return EmailFieldType;
+})();
+
+exports.EmailFieldType = EmailFieldType;
+},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/create-class":7}],29:[function(require,module,exports){
+'use strict';
+
+var _createClass = require('babel-runtime/helpers/create-class')['default'];
+
+var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
+
+exports.__esModule = true;
+
+var TextFieldType = (function () {
+	function TextFieldType() {
+		_classCallCheck(this, TextFieldType);
+	}
+
+	_createClass(TextFieldType, [{
+		key: 'uiType',
+		get: function get() {
+
+			return 'input';
+		}
+	}, {
+		key: 'type',
+		get: function get() {
+
+			return 'text';
+		}
+	}]);
+
+	return TextFieldType;
+})();
+
+exports.TextFieldType = TextFieldType;
+},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/create-class":7}],30:[function(require,module,exports){
 'use strict';
 
 var _createClass = require('babel-runtime/helpers/create-class')['default'];
@@ -316,11 +596,17 @@ var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
 
+var _interopRequireWildcard = require('babel-runtime/helpers/interop-require-wildcard')['default'];
+
 exports.__esModule = true;
 
 var _viewsFormView = require('./views/form-view');
 
 var _viewsFormView2 = _interopRequireDefault(_viewsFormView);
+
+var _factoriesFormFieldFactory = require('./factories/form-field-factory');
+
+var sdsdsd = _interopRequireWildcard(_factoriesFormFieldFactory);
 
 var _libsHelpers = require('./libs/helpers');
 
@@ -348,8 +634,6 @@ var Formell = (function () {
 		var formView = new _viewsFormView2['default'](options.form);
 
 		this.form = formView.el;
-
-		return this;
 	}
 
 	return Formell;
@@ -363,7 +647,7 @@ glob.Formell = Formell;
 
 exports['default'] = Formell;
 module.exports = exports['default'];
-},{"./libs/helpers":20,"./views/form-view":21,"babel-runtime/helpers/class-call-check":4,"babel-runtime/helpers/create-class":5,"babel-runtime/helpers/interop-require-default":7}],19:[function(require,module,exports){
+},{"./factories/form-field-factory":26,"./libs/helpers":33,"./views/form-view":34,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/create-class":7,"babel-runtime/helpers/interop-require-default":10,"babel-runtime/helpers/interop-require-wildcard":11}],31:[function(require,module,exports){
 'use strict';
 
 var _createClass = require('babel-runtime/helpers/create-class')['default'];
@@ -418,8 +702,6 @@ var BaseView = (function () {
 		if (this.className) {
 			this.addClasses(this.className);
 		}
-
-		return this;
 	}
 
 	BaseView.prototype.addClasses = function addClasses(classNames) {
@@ -447,7 +729,26 @@ var BaseView = (function () {
 
 exports['default'] = BaseView;
 module.exports = exports['default'];
-},{"babel-runtime/helpers/class-call-check":4,"babel-runtime/helpers/create-class":5}],20:[function(require,module,exports){
+},{"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/create-class":7}],32:[function(require,module,exports){
+"use strict";
+
+var _classCallCheck = require("babel-runtime/helpers/class-call-check")["default"];
+
+exports.__esModule = true;
+
+var Base = function Base() {
+	var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+	_classCallCheck(this, Base);
+
+	this.options = options;
+
+	return this;
+};
+
+exports["default"] = Base;
+module.exports = exports["default"];
+},{"babel-runtime/helpers/class-call-check":6}],33:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -476,7 +777,7 @@ function getGlobalObject() {
 	return new Function('return this')();
 }
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],21:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 'use strict';
 
 var _inherits = require('babel-runtime/helpers/inherits')['default'];
@@ -487,16 +788,16 @@ var _interopRequireDefault = require('babel-runtime/helpers/interop-require-defa
 
 exports.__esModule = true;
 
-var _libsBaseView = require('../libs/base-view');
+var _formellBaseView = require('./formell-base-view');
 
 /**
  * creates form
  */
 
-var _libsBaseView2 = _interopRequireDefault(_libsBaseView);
+var _formellBaseView2 = _interopRequireDefault(_formellBaseView);
 
-var FormView = (function (_BaseView) {
-	_inherits(FormView, _BaseView);
+var FormView = (function (_FormellBaseView) {
+	_inherits(FormView, _FormellBaseView);
 
 	function FormView() {
 		var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
@@ -504,23 +805,17 @@ var FormView = (function (_BaseView) {
 		_classCallCheck(this, FormView);
 
 		options.tagName = options.tagName || 'form';
-		options.className = options.className || 'frmll-form';
+		options.baseClassName = 'frmll-form';
 
-		if (options.className.indexOf('frmll-form') < 0) {
-			options.className = 'frmll-form ' + options.className;
-		}
-
-		_BaseView.call(this, options);
+		_FormellBaseView.call(this, options);
 
 		this.setAttributes();
 		this.addClasses(this.options.className);
-
-		return this;
 	}
 
 	FormView.prototype.ensureElement = function ensureElement() {
 
-		_BaseView.prototype.ensureElement.call(this);
+		_FormellBaseView.prototype.ensureElement.call(this);
 		this.el.id = 'frmll-' + this.options.uid;
 	};
 
@@ -539,8 +834,53 @@ var FormView = (function (_BaseView) {
 	};
 
 	return FormView;
-})(_libsBaseView2['default']);
+})(_formellBaseView2['default']);
 
 exports['default'] = FormView;
 module.exports = exports['default'];
-},{"../libs/base-view":19,"babel-runtime/helpers/class-call-check":4,"babel-runtime/helpers/inherits":6,"babel-runtime/helpers/interop-require-default":7}]},{},[18]);
+},{"./formell-base-view":35,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":9,"babel-runtime/helpers/interop-require-default":10}],35:[function(require,module,exports){
+'use strict';
+
+var _inherits = require('babel-runtime/helpers/inherits')['default'];
+
+var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default'];
+
+var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
+
+exports.__esModule = true;
+
+var _libsBaseView = require('../libs/base-view');
+
+/**
+ *
+ */
+
+var _libsBaseView2 = _interopRequireDefault(_libsBaseView);
+
+var FormellBaseView = (function (_BaseView) {
+	_inherits(FormellBaseView, _BaseView);
+
+	function FormellBaseView() {
+		var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+		_classCallCheck(this, FormellBaseView);
+
+		if (!options.el && !options.template) {
+			options.tagName = options.tagName || 'div';
+		}
+
+		options.className = options.className || options.baseClassName;
+
+		if (options.className.indexOf(options.baseClassName) < 0) {
+			options.className = options.baseClassName + ' ' + options.className;
+		}
+
+		_BaseView.call(this, options);
+	}
+
+	return FormellBaseView;
+})(_libsBaseView2['default']);
+
+exports['default'] = FormellBaseView;
+module.exports = exports['default'];
+},{"../libs/base-view":31,"babel-runtime/helpers/class-call-check":6,"babel-runtime/helpers/inherits":9,"babel-runtime/helpers/interop-require-default":10}]},{},[30]);

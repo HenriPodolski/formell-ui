@@ -1,4 +1,4 @@
-import FormView from '../../../src/views/form-view.js';
+import FormView from '../../../../src/views/form-view.js';
 import chai from 'chai';
 
 var expect = chai.expect;

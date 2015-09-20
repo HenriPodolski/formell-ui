@@ -40,8 +40,6 @@ class BaseView {
 		if (this.className) {
 			this.addClasses(this.className);
 		}
-
-		return this;
 	}
 
 	addClasses(classNames) {
