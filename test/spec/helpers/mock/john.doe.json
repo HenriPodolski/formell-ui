@@ -1,0 +1,28 @@
+{
+	"firstname": "John",
+	"lastname": "Doe",
+	"website": "<a href=\"http://johndoe.bla\">John Doe's website</a>",
+	"age": 27,
+	"available": true,
+	"hobbies": ["sailing", "surfing", "video games"],
+	"skills": {
+		"programming": ["PHP", "JavaScript", "HTML", "CSS"],
+		"design": ["UX", "Visual", "Motion"],
+		"management": ["Scrum", "Kanban"]
+	},
+	"salary": 75.25,
+	"salary-type": {
+		"hourly": true,
+		"daily": false,
+		"monthly": false
+	},
+	"workingHours": {
+		"monday": [10, 18],
+		"thursday": [9, 19],
+		"wednesday": [9, 18],
+		"thursday": [7, 18],
+		"friday": [9, 15],
+		"saturday": [null, null],
+		"sunday": [null, null]
+	}
+}

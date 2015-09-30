@@ -1,11 +1,27 @@
-import FormView from './views/form-view';
-import * as sdsdsd from './factories/form-field-factory';
-import {createUID, getGlobalObject} from './libs/helpers';
+import FormView from './modules/form-schema/form-schema-view';
+import {getGlobalObject} from './libs/helpers/environment';
+import FormellSchema from './libs/formell-schema';
 
 class Formell {
 
-	set form(formNode) {
-		this._form = formNode;
+	set formView(formView) {
+		this._formView = formView;
+	}
+
+	get formView() {
+		return this._formView;
+	}
+
+	set options(options) {
+		this._options = options;
+	}
+
+	get options() {
+		return this._options;
+	}
+
+	set form(form) {
+		this._form = form;
 	}
 
 	get form() {
@@ -14,19 +30,25 @@ class Formell {
 
 	constructor(options={}) {
 
-		options.form = options.form || {};
-		options.form.uid = createUID();
+		this.options = options;
+		this.create();
+	}
 
-		options.data = options.data || {};
+	create() {
 
-		let formView = new FormView(options.form);
+		this.formView = new FormView({
+			action: this.options.action || 'javascript:void(0)',
+			method: this.options.method || 'POST',
+			data: this.options.data || {}
+		});
 
-		this.form = formView.el;
+		this.form = this.formView.render().el;
+
+		return this.form;
 	}
 };
 
-let glob = getGlobalObject();
-
-glob.Formell = Formell;
+// add formel class to global namespace
+getGlobalObject().Formell = Formell;
 
 export default Formell;

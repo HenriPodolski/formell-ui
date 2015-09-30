@@ -6,5 +6,28 @@
 </head>
 <body>
     <script src="formell.js"></script>
+    <!-- Demo -->
+    <script>
+    	var formell = new Formell({
+            data: {
+                "id": "demo",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "surname": {
+                        "type": "string"
+                    }
+                }
+            }
+        });
+
+    	console.log(formell.form);
+
+    	document.body.appendChild(formell.form);
+    </script>
+    <!-- /Demo -->
 </body>
 </html>

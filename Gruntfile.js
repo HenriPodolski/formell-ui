@@ -1,18 +1,34 @@
 module.exports = function (grunt) {
+    'use strict';
 
     grunt.initConfig({
         browserify: {
             dist: {
                 options: {
-                    transform: [[
+                    browserifyOptions: {
+                        debug: true
+                    },
+                    exclude: ['jquery', 'underscore'],
+                    transform: [
+                        [
                             'babelify',
                             {
                                 'loose': 'all',
                                 'sourceMaps': true,
                                 'modules': 'common',
-                                'optional': ['runtime']
+                                'optional': ['es7.decorators']
                             }
-                        ]]
+                        ],[
+                            'aliasify', 
+                            {
+                                aliases: {
+                                    'backbone': 'exoskeleton'
+                                },
+                                global: true, // By default Aliasify only runs against your code (not node_modules). This flag tells it to remap third-party code too.
+                                verbose: true
+                            }
+                        ]
+                    ]
                 },
                 files: { './dist/formell.js': ['./src/formell.js'] }
             }

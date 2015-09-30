@@ -40,10 +40,34 @@ module.exports = function(config) {
     runnerPort: 9100,
 
     browserify: {
-      debug: true,
-      transform: [
-        ['babelify', {optional: ["runtime"]}]
-      ]
+        configure: function(bundle) {
+          bundle.on('prebundle', function() {
+            bundle.exclude('jquery');
+            bundle.exclude('underscore');
+          });
+        },
+        
+        transform: [
+            [
+              'aliasify', 
+              {
+                  aliases: {
+                      'backbone': 'exoskeleton'
+                  },
+                  global: true, // By default Aliasify only runs against your code (not node_modules). This flag tells it to remap third-party code too.
+                  verbose: true
+              }
+            ],
+            [
+              'babelify',
+              {
+                  'loose': 'all',
+                  'sourceMaps': true,
+                  'modules': 'common',
+                  'optional': ['es7.decorators']
+              }
+            ]
+        ]
     },
 
     preprocessors: {
