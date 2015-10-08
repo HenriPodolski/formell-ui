@@ -1,9 +1,11 @@
 import Exoskeleton from '../../libs/helpers/exoskelesston';
+import {createUID} from '../../libs/helpers/string';
 import formSchemaItemFactory from './items/form-schema-item-factory';
 import form2js from '../../libs/vendor/form2js';
 import {name, tagName, on, id, template} from '../../libs/helpers/exoskelesston';
 
 @name('FormSchemaView')
+@id(`frmll-${createUID()}`)
 @tagName('form')
 class FormSchemaView extends Exoskeleton.View {
 
