@@ -1,6 +1,7 @@
 {
-  "name": "formell.js",
+  "name": "formell-ui",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -28,15 +29,11 @@
     "karma-mocha-reporter": "^1.0.3",
     "karma-phantomjs-launcher": "*",
     "karma-sinon": "^1.0.4",
-    "sinon": "^1.15.4",
-    "virtual-html": "^1.3.0"
+    "sinon": "^1.15.4"
   },
   "dependencies": {
-    "babel-core": "^5.8.9",
-    "babel-runtime": "^5.8.9",
     "backbone.nativeajax": "^0.4.3",
     "backbone.nativeview": "^0.3.3",
-    "exoskeleton": "^0.7.0",
-    "virtual-dom": "^2.1.0"
+    "exoskeleton": "^0.7.0"
   }
 }
