@@ -1,8 +1,10 @@
 # Formell UI
 
-[Formell UI Dev Setup](DEVELOPMENT.md)
-[Formell UI API](API.md)
-[Formell Schema](SCHEMA.md)
+Status: work in progress
+
+* [Formell UI Dev Setup](DEVELOPMENT.md)
+* [Formell UI API](API.md)
+* [Formell Schema](SCHEMA.md)
 
 ## License
 

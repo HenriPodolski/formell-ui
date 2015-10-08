@@ -22,10 +22,12 @@ class FormSchemaView extends Exoskeleton.View {
 			// @todo i18n/l10n
 			submitButton.innerHTML = 'OK';
 			this.el.appendChild(submitButton);
-
-			this.undelegateEvents();
-			this.delegateEvents();
 		}
+	}
+
+	@on('click [type="submit"]')
+	submitButtonClick(evt) {
+		console.log(`${this}.submitButtonClick()`);
 	}
 
 	@on('submit')
@@ -55,8 +57,6 @@ class FormSchemaView extends Exoskeleton.View {
 	addAll() {
 
 		let properties = this.options.data.properties;
-
-		console.log(this.options.data);
 
 		for(let key in properties) {
 
