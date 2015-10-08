@@ -1,7 +1,12 @@
-import FormView from './modules/form-schema/form-schema-view';
+import FormSchemaView from './modules/form-schema/form-schema-view';
 import {getGlobalObject} from './libs/helpers/environment';
 import FormellSchema from './libs/formell-schema';
 
+/**
+ * controller and facade for Formell UI
+ * @class Formell 
+ * @todo  rename to FormellUI
+ */
 class Formell {
 
 	set formView(formView) {
@@ -31,20 +36,38 @@ class Formell {
 	constructor(options={}) {
 
 		this.options = options;
-		this.create();
 	}
 
-	create() {
+	createSchema() {
 
-		this.formView = new FormView({
+		// @todo implement create schema
+	}
+
+	updateSchema() {
+		// @todo same as createSchema but exisiting data passed
+	}
+
+	createForm() {
+
+		let formellSchemaFactory = new FormellSchema.Factory();
+
+		// @todo check if FormSchemaView should be responsible for all requirements
+		// or does it need an extra FormView module
+		this.formView = new FormSchemaView({
 			action: this.options.action || 'javascript:void(0)',
 			method: this.options.method || 'POST',
-			data: this.options.data || {}
+			data: this.options.data || {}/*,
+			model: formellSchemaFactory.create(this.options.data)
+			*/
 		});
 
 		this.form = this.formView.render().el;
 
 		return this.form;
+	}
+
+	updateForm() {
+		// @todo same as createForm but exisiting data passed
 	}
 };
 

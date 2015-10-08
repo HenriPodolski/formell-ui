@@ -11,7 +11,7 @@ describe('Formell Facade', ()=>{
 
 	it('should return a value for member form and formView', ()=> {
 		let formell = new Formell();
-		formell.create();
+		formell.createForm();
 
 		expect(formell.form).to.be.ok;
 		expect(formell.formView).to.be.ok;
@@ -33,7 +33,7 @@ describe('Formell Initialization of DOM', ()=>{
 
 	it('should provide a <form> dom node with a unique id name starting with frmll-', ()=>{
 		let formell = new Formell();
-		formell.create();
+		formell.createForm();
 
 		expect(formell.form.nodeName.toLowerCase()).to.equal('form');
 		expect(formell.form.id).to.be.ok;
@@ -44,7 +44,7 @@ describe('Formell Initialization of DOM', ()=>{
 	it('should use values passed for keys method and action, to create valid form attributes on the form element', ()=>{
 		let formell = new Formell({method: 'GET', action: '#'});
 
-		formell.create();
+		formell.createForm();
 
 		expect(formell.form.getAttribute('method')).to.equal('GET');
 		expect(formell.form.getAttribute('action')).to.equal('#');
